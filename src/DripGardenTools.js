@@ -19,60 +19,7 @@ const $PCS_API = "https://api.pancakeswap.info/api/v2/tokens/";
 
 function DripGardenTools() {
   
-    const { activate, deactivate } = useWeb3React();
-    const { active, chainId, account, networkName } = useWeb3React();
-    const { library } = useWeb3React();
-
-// example of switching or adding network with Harmony Mainnet
-const switchNetwork = async () => {
-   try {
-     await library.provider.request({
-       method: "wallet_switchEthereumChain",
-       params: [{chainId: "0x38"  }],
-     });
-   } catch (switchError) {
-     // 4902 error code indicates the chain is missing on the wallet
-     if (switchError.code === 4902) {
-       try {
-         await library.provider.request({
-           method: "wallet_addEthereumChain",
-           params: [
-             {
-              chainId: `0x38`,
-              chainName: "Binance Smart Chain Mainnet",
-              nativeCurrency: {
-                name: "Binance Chain Native Token",
-                symbol: "BNB",
-                decimals: 18,
-                rpcUrls: [
-                  "https://bsc-dataseed1.binance.org",
-                  "https://bsc-dataseed2.binance.org",
-                  "https://bsc-dataseed3.binance.org",
-                  "https://bsc-dataseed4.binance.org",
-                  "https://bsc-dataseed1.defibit.io",
-                  "https://bsc-dataseed2.defibit.io",
-                  "https://bsc-dataseed3.defibit.io",
-                  "https://bsc-dataseed4.defibit.io",
-                  "https://bsc-dataseed1.ninicoin.io",
-                  "https://bsc-dataseed2.ninicoin.io",
-                  "https://bsc-dataseed3.ninicoin.io",
-                  "https://bsc-dataseed4.ninicoin.io",
-                  "wss://bsc-ws-node.nariox.org"
-                ],
-                blockExplorerUrls: ["https://bscscan.com"]
-
-              }
-            }
-           ]
-         });
-       } catch (error) {
-          console.error(error)
-       }
-     }
-   }
- };
-   
-
+    
 const [user, setUser] = useState({
     wallet: null,
     walletexits: false,
@@ -121,21 +68,21 @@ const [user, setUser] = useState({
   },[])
   
 
-  const checkWallet= (e)=>{
-    console.log(e.target.value)
-    const walletadd = e.target.value
-    let address = walletadd.replaceAll(" ", "");
+  // const checkWallet= (e)=>{
+  //   console.log(e.target.value)
+  //   const walletadd = e.target.value
+  //   let address = walletadd.replaceAll(" ", "");
     
-    if ( address.length != 42 || address.indexOf("0x") == -1) {alert('Input correct address'); }
-    setUser(prevState => ({
-      ...prevState,
-        wallet: address,
-        walletexits:true   
-   }
-   ));
+  //   if ( address.length != 42 || address.indexOf("0x") == -1) {alert('Input correct address'); }
+  //   setUser(prevState => ({
+  //     ...prevState,
+  //       wallet: account,
+  //       walletexits:true   
+  //  }
+  //  ));
   
       
-  }
+  // }
 
   const updatedrip_busd = async()=> {
 
@@ -243,10 +190,68 @@ const [user, setUser] = useState({
 
   }));
  
-
-
-
   }
+  const { activate, deactivate } = useWeb3React();
+    const { active, chainId, account, networkName } = useWeb3React();
+    const { library } = useWeb3React();
+
+// example of switching or adding network with Harmony Mainnet
+const switchNetwork = async () => {
+   try {
+     await library.provider.request({
+       method: "wallet_switchEthereumChain",
+       params: [{chainId: "0x38"  }],
+     });
+   } catch (switchError) {
+     
+     // 4902 error code indicates the chain is missing on the wallet
+     if (switchError.code === 4902) {
+       try {
+         await library.provider.request({
+           method: "wallet_addEthereumChain",
+           params: [
+             {
+              chainId: `0x38`,
+              chainName: "Binance Smart Chain Mainnet",
+              nativeCurrency: {
+                name: "Binance Chain Native Token",
+                symbol: "BNB",
+                decimals: 18,
+                rpcUrls: [
+                  "https://bsc-dataseed1.binance.org",
+                  "https://bsc-dataseed2.binance.org",
+                  "https://bsc-dataseed3.binance.org",
+                  "https://bsc-dataseed4.binance.org",
+                  "https://bsc-dataseed1.defibit.io",
+                  "https://bsc-dataseed2.defibit.io",
+                  "https://bsc-dataseed3.defibit.io",
+                  "https://bsc-dataseed4.defibit.io",
+                  "https://bsc-dataseed1.ninicoin.io",
+                  "https://bsc-dataseed2.ninicoin.io",
+                  "https://bsc-dataseed3.ninicoin.io",
+                  "https://bsc-dataseed4.ninicoin.io",
+                  "wss://bsc-ws-node.nariox.org"
+                ],
+                blockExplorerUrls: ["https://bscscan.com"]
+
+              }
+            }
+           ]
+         });
+       } catch (error) {
+         console.log(error)
+
+       }
+     }
+   }
+ };
+ console.log(account)
+ setUser(prevState=>({
+  ...prevState,
+  wallet: account,
+  walletexits:true 
+
+}));
 
   
   return (
@@ -293,7 +298,7 @@ const [user, setUser] = useState({
        
        <tr > 
            <td id='fcolumn' className='balance'>Wallet Address</td>
-           <td id='tcolumn' className='balance'><input onChange={checkWallet} /></td>
+           {/* <td id='tcolumn' className='balance'><input onChange={checkWallet} /></td> */}
            <td id='tcolumn' className='balance'>Balance</td>
        </tr>
        </tbody>
