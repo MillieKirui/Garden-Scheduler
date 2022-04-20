@@ -5,15 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter} from 'react-router-dom';
 import { render } from 'react-dom';
-import { ChakraProvider } from "@chakra-ui/react";
+import { Web3ReactProvider } from '@web3-react/core'
+import { Web3Provider } from "@ethersproject/providers";
+
+function getLibrary(provider) {
+  return new Web3Provider(provider);
+}
 
 
 const rootElement = document.getElementById("root");
 render(
  <BrowserRouter>
-    <ChakraProvider>
-    <App />
-    </ChakraProvider>
+     <Web3ReactProvider getLibrary={getLibrary}>
+     <App />
+     </Web3ReactProvider>
+  
 
 
  </BrowserRouter>

@@ -8,21 +8,72 @@ import axios from 'axios';
 import {WalletLinkConnector} from "@web3-react/walletlink-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { useWeb3React } from '@web3-react/core';
-import Modal from './connection';
-import {ethers} from 'ethers'
+import { useWeb3React } from '@web3-react/core'
 
 
-
-
+const Injected = new InjectedConnector({
+  supportedChainIds: [1, 3, 4, 5, 42]
+ });
 
 const $PCS_API = "https://api.pancakeswap.info/api/v2/tokens/";
 
 function DripGardenTools() {
+  
+    const { activate, deactivate } = useWeb3React();
+    const { active, chainId, account, networkName } = useWeb3React();
+    const { library } = useWeb3React();
 
- 
+// example of switching or adding network with Harmony Mainnet
+const switchNetwork = async () => {
+   try {
+     await library.provider.request({
+       method: "wallet_switchEthereumChain",
+       params: [{chainId: "0x38"  }],
+     });
+   } catch (switchError) {
+     // 4902 error code indicates the chain is missing on the wallet
+     if (switchError.code === 4902) {
+       try {
+         await library.provider.request({
+           method: "wallet_addEthereumChain",
+           params: [
+             {
+              chainId: `0x38`,
+              chainName: "Binance Smart Chain Mainnet",
+              nativeCurrency: {
+                name: "Binance Chain Native Token",
+                symbol: "BNB",
+                decimals: 18,
+                rpcUrls: [
+                  "https://bsc-dataseed1.binance.org",
+                  "https://bsc-dataseed2.binance.org",
+                  "https://bsc-dataseed3.binance.org",
+                  "https://bsc-dataseed4.binance.org",
+                  "https://bsc-dataseed1.defibit.io",
+                  "https://bsc-dataseed2.defibit.io",
+                  "https://bsc-dataseed3.defibit.io",
+                  "https://bsc-dataseed4.defibit.io",
+                  "https://bsc-dataseed1.ninicoin.io",
+                  "https://bsc-dataseed2.ninicoin.io",
+                  "https://bsc-dataseed3.ninicoin.io",
+                  "https://bsc-dataseed4.ninicoin.io",
+                  "wss://bsc-ws-node.nariox.org"
+                ],
+                blockExplorerUrls: ["https://bscscan.com"]
 
-  const [user, setUser] = useState({
+              }
+            }
+           ]
+         });
+       } catch (error) {
+          console.error(error)
+       }
+     }
+   }
+ };
+   
+
+const [user, setUser] = useState({
     wallet: null,
     walletexits: false,
       plants: 1,
@@ -211,9 +262,11 @@ function DripGardenTools() {
             This is a read only application, NO wallet connection or transaction involved. We will never ask your seed phrase or private key, NEVER give those anywhere!
             </div>
             <div className="connect"> 
-              <button >Connect Wallet</button>  
+            <button onClick={() => { activate(Injected) }}>Metamask connection</button>
+            <button onClick={deactivate}>Disconnect</button>
 
               </div>
+
          
           </div> 
           
@@ -246,13 +299,17 @@ function DripGardenTools() {
        </tbody>
 
    </table>
-   <div></div>
+   <div>Connection Status: ${active}</div>
+    <div>Account: ${account}</div>
+    <div>Network ID: ${chainId}</div>
+    <div>{networkName}</div>
   
   
 
    {user.walletexits ? <Scheduler collecteddata = {{busd_price:drip_busd.price, rate_plant_lp: data.rate_plant_lp, wallet: user.wallet}}/> : null}
 
    </div>
+   
    
 
     
@@ -262,4 +319,6 @@ function DripGardenTools() {
   );
 
   }
+
+
 export default DripGardenTools;

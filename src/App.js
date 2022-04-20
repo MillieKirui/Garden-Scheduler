@@ -20,9 +20,9 @@ return(
     
     <Routes>
     
-    <Route path="/" element={<Home/>}/>
+    {/* <Route path="/" element={<Home/>}/> */}
     
-    <Route path="/DripGardenTools" element={<DripGardenTools/>}/>
+    <Route path="/" element={<DripGardenTools/>}/>
     <Route path="/Scheduler" element={<Scheduler/>}/>
    
 
