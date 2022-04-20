@@ -1,0 +1,223 @@
+.main{
+  display:inline-block;
+  width: fit-content;
+  height: fit-content;
+  padding: 0px;
+  margin: 0px;
+  background-image: url('./images/background.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+}
+.Intro{
+  background-color: #A0BF30;
+  display: flex;
+}
+.thegrid{
+
+    display: grid;
+    height: 50%;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-auto-flow: dense;
+
+    column-gap:0vh;
+    row-gap: 0vh;
+    object-fit: contain;
+
+  }
+  .thegrid .box1{
+    cursor: pointer;
+  }
+
+
+  @media only screen and (min-width:300px){
+    .main{
+      display: block;
+    }
+    .thegrid{
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 22% 22% 22%;
+    }
+
+    .Intro .para p{
+      font-size: 15px;
+
+    }
+    .Intro .para{
+      width: 80%;
+      margin-top: 5px;
+      margin-bottom: 0px;
+      
+    }
+    .Intro .connect{
+      margin-top: 10%;
+    }
+    .Intro .connect button{
+      font-size: 13px;
+      color: #A0BF30;
+    }
+
+    .thegrid .box img{
+      object-fit: fill;
+
+    }  
+  }
+@media only screen and (min-width:415px ){
+  .main{
+    display: block;
+  }
+  .thegrid{
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 17% 17% 17%;
+  }
+
+  .Intro .para p{
+    font-size: 15px;
+
+  }
+  .Intro .para{
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    
+  }
+  .Intro .connect{
+    margin-top: 10%;
+  }
+  .Intro .connect button{
+    font-size: 13px;
+    color: #A0BF30;
+  }
+
+  .thegrid .box img{
+    object-fit: fill;
+
+  }  
+
+  
+}
+
+
+  @media only screen and (min-width: 500px) {
+    .main{
+      display: block;
+    }
+    .thegrid {
+      grid-template-columns: 23% 23% 23%;
+      grid-template-rows: 30% 30%;
+      grid-row-gap: 40px;
+      margin-top: 20px;
+      grid-column-gap: 10%;      
+    }
+    .thegrid .box img{
+      object-fit: fill;
+
+    }
+
+    .thegrid .box1 .box2 .box3 .box4 .box5 .box6{
+      height: 100%;
+      width: 100%;
+    }
+    .box1{
+      grid-row-start:2;
+      grid-row-end:3;
+    }
+    .Intro{
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    .Intro button{
+      position: relative;
+    }
+    p{
+      
+      margin-top: 5px;
+      margin-bottom: 0px;
+      margin-left: 3%;
+      margin-right: 0%;
+
+    }
+    .Intro .para{
+      width: 80%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      
+    }
+    .Intro .connect button{
+      font-size: 15px;
+      color: #A0BF30;
+     }
+     .Intro .connect{
+       margin-top:18px;
+     }
+
+
+
+  }
+
+
+    @media only screen and (min-width: 1050px) {
+      .main{
+        display: block;
+      }
+      .thegrid {
+        grid-template-columns: 15% 15% 15%;
+        grid-template-rows:35% 35%;
+        grid-column-gap: 15%;
+        grid-row-gap: 15%; 
+        margin-top: 20px;    
+      }
+      .thegrid .box img{
+        object-fit: fill;
+
+      }
+
+      .Intro{
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;
+
+      }
+      .Intro .para{
+        width: 87%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        
+      }
+      .Intro .para p{
+        font-size: 20px;
+    
+      }
+      .Intro .connect{
+        margin-top: 18px;
+      }
+      .Intro .connect button{
+       font-size: 18px;
+       color: #A0BF30;
+      }
+ 
+
+    }
+  
+  
+  .Intro{
+ 
+
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 18px;
+
+  font-family: 'Arial narrow';
+
+ 
+   
+  }
+  .thegrid img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
